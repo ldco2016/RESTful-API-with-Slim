@@ -7,5 +7,16 @@ $app = new \Slim\App;
 
 // Get All Customers
 $app->get('/api/customers', function(Request $request, Response $response){
-	echo CUSTOMERS;
+	$sql = "SELECT * FROM customers";
+
+	try {
+		// Get DB Object
+		$db = new db();
+
+		// Call Connect
+		$db = $db->connect();
+
+	} catch(PDOException $e) {
+		echo '{"error": {"text": '.$e->getMessage().'}';
+	}
 });
